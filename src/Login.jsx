@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import './App.css'
 
 
 const Login = () => {
@@ -7,10 +9,10 @@ const Login = () => {
         <h1>Login</h1>
 
         <div className="form-content">
-            <label for="username">Username</label>
+            <label htmlFor="username">Username</label>
             <input name="username" id="username" />
 
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input type="password" name="password" id="password" />
 
             <div className="btn-group">

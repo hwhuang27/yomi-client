@@ -9,14 +9,18 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Navigate to='/login'/>,
+    // reroute to dashboard if user is logged in
   },
   {
     path: "/login",
     element: <Login />,
+    // reroute to dashboard if user is logged in
+
   },
   {
     path: "/register",
     element: <Register />,
+    // reroute to dashboard if user is logged in
   },
 ])
 
