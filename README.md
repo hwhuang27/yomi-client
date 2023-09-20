@@ -1,6 +1,7 @@
 # Bookshelf
 
-Web service where users can create accounts and keep track of their books. 
+Web service where users can create accounts and keep track of their books.
+
 Served with the [bookshelf-api](https://github.com/hwhuang27/bookshelf-api).
 
 Each book has a:
