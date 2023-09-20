@@ -8,7 +8,8 @@ const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPass, setConfirmPass] = useState("");
-    const [message, setMessage] = useState("");
+    const [regMsg, setRegMsg] = useState("");
+    const [errMsg, setErrMsg] = useState("");
 
     let handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,19 +27,23 @@ const Register = () => {
                     confirm_password: confirmPass,
                 }),
             });
-            let resJson = await res.json();
-            console.log(resJson);
+            
             if(res.status === 200){
                 setFirstName("");
                 setLastName("");
                 setUsername("");
                 setPassword("");
                 setConfirmPass("");
-                setMessage(`User ${username} registered!`);
+                setErrMsg("");
+                setRegMsg(`User ${username} registered!`);
+            } else if(firstName === "" || lastName === "" || username === "" || password === "" || confirmPass === ""){
+                setErrMsg("Fields cannot be empty");
+            } else if (password !== confirmPass){
+                setErrMsg("Passwords don't match");
             } else if( res.status === 400) {
-                setMessage("Empty fields or username already registered");
+                setErrMsg("Username already registered");
             } else {
-                setMessage("Some error occured");
+                setErrMsg("Server error occured");
             }
         } catch (err) {
             console.log(err);
@@ -46,7 +51,6 @@ const Register = () => {
     }
 
     return (
-        //<form action="https://bookshelf-api-production.up.railway.app/api/register" method="POST">
         <form onSubmit={handleSubmit}>
         <h1>Register</h1>
 
@@ -91,8 +95,9 @@ const Register = () => {
                 onChange={(e) => setConfirmPass(e.target.value)}
             />
 
-            <div className="message">
-                {message ? <p>{message}</p> : null}
+            <div className="errMsg">
+                {regMsg ? <p style={{color: "#22c55e"}}>{regMsg}</p> : null}
+                    {errMsg ? <p style={{ color: "#ef4444"}}>{errMsg}</p> : null}
             </div>
 
             <div className="btn-group">
