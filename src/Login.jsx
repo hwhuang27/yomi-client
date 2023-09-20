@@ -1,22 +1,23 @@
 import { Link } from "react-router-dom";
-import './App.css'
 
 
 const Login = () => {
     return (
     <form action="/api/login" method="POST">
-        <div>
+        <h1>Login</h1>
+
+        <div className="form-content">
             <label for="username">Username</label>
             <input name="username" id="username" />
-        </div>
-        <div>
+
             <label for="password">Password</label>
             <input type="password" name="password" id="password" />
-        </div>
-        <div>
-            <button>Login</button>
-        </div>
-        <Link to='/register' className="button">Register</Link>
+
+            <div className="btn-group">
+                <button>Login</button>
+                <Link to='/register' className="button">Sign Up</Link>
+            </div>
+        </div>    
     </form>
     );
 };
