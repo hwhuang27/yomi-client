@@ -4,6 +4,10 @@ import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom"
 import Login from './Login.jsx'
 import Register from './Register.jsx'
 import Dashboard from './Dashboard.jsx'
+import AddBook from './BookRoutes/AddBook.jsx'
+import EditBook from './BookRoutes/EditBook.jsx'
+import DeleteBook from './BookRoutes/DeleteBook.jsx'
+
 import './index.css'
 
 const router = createBrowserRouter([
@@ -14,18 +18,27 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
-    // reroute to dashboard if user is logged in (localStorage)
   },
   {
     path: "/register",
     element: <Register />,
-    // reroute to dashboard if user is logged in (localStorage)
   },
   {
     path: "/dashboard",
     element: <Dashboard />,
-    // reroute to login page if user is NOT logged in (localStorage)
   },
+  {
+    path: "/book/new",
+    element: <AddBook />
+  },
+  {
+    path: "/book/edit",
+    element: <EditBook />
+  },
+  {
+    path: "/book/delete",
+    element: <DeleteBook />
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

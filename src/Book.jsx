@@ -11,8 +11,8 @@ function Book({title, author, status, rating, notes, date_added}) {
             <td>{rating}</td>
             <td>{notes}</td>
             <td>{date_added}</td>
-            <a href="/book/edit">Edit</a>
-            <a href="/book/delete">Delete</a>
+            <td><a href="/book/edit">Edit</a></td>
+            <td><a href="/book/delete">Delete</a></td>
         </tr>
     );
 }
