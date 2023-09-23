@@ -1,8 +1,8 @@
 # Bookshelf
 
-Web service where users can create accounts and keep track of their books.
+Website where users can create a personal bookshelf to keep track of their books.
 
-Served with the [bookshelf-api](https://github.com/hwhuang27/bookshelf-api).
+Fullstack practice project. Served with the [bookshelf-api](https://github.com/hwhuang27/bookshelf-api).
 
 Each book has a:
 - title
@@ -10,8 +10,6 @@ Each book has a:
 - current status
 - rating
 - personal note
-
-**Development currently in progress..**
 
 ## Built with...
 
