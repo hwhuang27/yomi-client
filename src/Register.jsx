@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { redirect, Link, Navigate } from "react-router-dom";
 import './App.css'
 
 const Register = () => {
@@ -13,7 +13,16 @@ const Register = () => {
 
     let handleSubmit = async (e) => {
         e.preventDefault();
+
         try {
+            if (firstName === "" || lastName === "" || username === "" || password === "" || confirmPass === "") {
+                setErrMsg("Fields cannot be empty");
+                throw new Error("Fields cannot be empty");
+            } else if (password !== confirmPass) {
+                setErrMsg("Passwords don't match");
+                throw new Error("Passwords don't match");
+            }    
+
             let res = await fetch("https://bookshelf-api-production.up.railway.app/api/register", {
                 method: "POST",
                 headers: {
@@ -29,18 +38,10 @@ const Register = () => {
             });
             
             if(res.status === 200){
-                setFirstName("");
-                setLastName("");
-                setUsername("");
-                setPassword("");
-                setConfirmPass("");
                 setErrMsg("");
                 setRegMsg(`User ${username} registered!`);
-            } else if(firstName === "" || lastName === "" || username === "" || password === "" || confirmPass === ""){
-                setErrMsg("Fields cannot be empty");
-            } else if (password !== confirmPass){
-                setErrMsg("Passwords don't match");
             } else if( res.status === 400) {
+                setRegMsg("");
                 setErrMsg("Username already registered");
             } else {
                 setErrMsg("Server error occured");
@@ -96,8 +97,11 @@ const Register = () => {
             />
 
             <div className="errMsg">
-                {regMsg ? <p style={{color: "#22c55e"}}>{regMsg}</p> : null}
-                    {errMsg ? <p style={{ color: "#ef4444"}}>{errMsg}</p> : null}
+                {regMsg ? (
+                // <p style={{color: "#22c55e"}}>{regMsg}</p>
+                <Navigate to="/login" replace={true} />
+                ) : null}
+                {errMsg ? <p style={{ color: "#ef4444"}}>{errMsg}</p> : null}
             </div>
 
             <div className="btn-group">
