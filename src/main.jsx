@@ -32,11 +32,11 @@ const router = createBrowserRouter([
     element: <AddBook />
   },
   {
-    path: "/book/edit",
+    path: "/book/edit/:id",
     element: <EditBook />
   },
   {
-    path: "/book/delete",
+    path: "/book/delete/:id",
     element: <DeleteBook />
   }
 ])

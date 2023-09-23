@@ -1,34 +1,92 @@
-import { useState } from 'react'
-import { Link } from "react-router-dom";
-import './App.css'
+import { useState, useEffect } from 'react'
+import { Link, useNavigate } from "react-router-dom";
 import Book from './Book.jsx'
+import './App.css'
 
 function Dashboard() {
-  const isEmpty = () => {
-    return Object.keys(data).length === 0;
-  }
+  const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  let navigate = useNavigate();
+  let logout = () => {
+    localStorage.clear();
+    navigate('/login');
+  } 
+  
+  const decodeEntities = (function () {
+    // this prevents any overhead from creating the object each time
+    const element = document.createElement('div');
+    function decodeHTMLEntities(str) {
+      if (str && typeof str === 'string') {
+        // strip script/html tags
+        str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+        str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+        element.innerHTML = str;
+        str = element.textContent;
+        element.textContent = '';
+      }
+      return str;
+    }
+    return decodeHTMLEntities;
+  })();
 
-  const example = {
-    id: '1',
-    title: 'Chainsaw Man',
-    author: 'Tatsuki Fujimoto',
-    status: 'Finished',
-    rating: '10',
-    notes: `he's just like me fr`,
-    date_added: '09-22-2023',
-  };
+  // fetch all books from user
+  useEffect(() => {
+    const getBooks = async () => {
+      try {
+        const response = await fetch(`https://bookshelf-api-production.up.railway.app/api/books`,
+          {
+            method: "GET",
+            headers: {
+              "Authorization": `bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        if (!response.ok){
+          throw new Error(`HTTP Error: Status Code ${response.status}`);
+        }
+        let data = await response.json();
+        
+        // cleanup data
+        await data.books.map((book) => {
+          // unescape HTML characters
+          book.title = decodeEntities(book.title);
+          book.author = decodeEntities(book.author);
+          book.notes = decodeEntities(book.notes);
+          
+          // change date formatting
+          let date = new Date(book.date_added);
+          book.date_added = `${date.getUTCMonth() + 1}-${date.getUTCDate()}-${date.getUTCFullYear()}`
+        
+          return book;
+        })
 
-  const data = [];
-  data.push(example);
+        setBooks(data.books);
+        setError(null);
+      } catch (err) {
+        setError(err.message);
+        setBooks([]);
+      } finally {
+        setLoading(false);
+      }
+    }
+    getBooks();
+  }, []);
 
   return (
     <div>
       <h1>📚 Bookshelf 📚</h1>
-      <h2>Welcome back, [username / first name]</h2>
+      <h2>Welcome back, {localStorage.getItem('name')}</h2>
       <Link to="/book/new" className="button">Add New Book</Link>
+      <button onClick={logout}>Logout</button>
 
-      {isEmpty(data) ? <h2>Your bookshelf is empty!</h2> : 
-        <table>
+      {loading && <h2>One moment...</h2>}
+      {error && (
+        <h2>{`There was a problem fetching the post data - ${error}`}</h2>
+      )}
+
+      {books.length === 0 ? <h2>Your bookshelf is empty!</h2> :
+      <table>
           <thead>
             <tr>
               <th>Title</th>
@@ -42,9 +100,10 @@ function Dashboard() {
             </tr>
           </thead>
           <tbody>
-            {data.map((book) => {
+            {books.map((book) => {
               return <Book
-                key={book.id}
+                key={book._id}
+                id={book._id}
                 title={book.title}
                 author={book.author}
                 status={book.status}

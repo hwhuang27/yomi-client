@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { Link } from "react-router-dom";
-import './App.css'
 
-function Book({title, author, status, rating, notes, date_added}) {
+function Book({id, title, author, status, rating, notes, date_added}) {
     return (
         <tr>
             <td>{title}</td>
@@ -11,8 +10,8 @@ function Book({title, author, status, rating, notes, date_added}) {
             <td>{rating}</td>
             <td>{notes}</td>
             <td>{date_added}</td>
-            <td><a href="/book/edit">Edit</a></td>
-            <td><a href="/book/delete">Delete</a></td>
+            <td><Link to={`/book/edit/${id}`}>Edit</Link></td>
+            <td><Link to={`/book/delete/${id}`}>Delete</Link></td>
         </tr>
     );
 }

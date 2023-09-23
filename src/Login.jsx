@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { redirect, Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import './App.css'
 
 const Login = () => {
@@ -7,6 +7,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [errMsg, setErrMsg] = useState("");
 
+    let navigate = useNavigate();
     let handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -31,8 +32,8 @@ const Login = () => {
                 setErrMsg("");
                 localStorage.setItem("token", result.token);
                 localStorage.setItem("username", result.body.username);
-                localStorage.setItem("userId", result.body._id);
-                console.log(result.token);
+                localStorage.setItem("name", result.body.first_name);
+                navigate('/dashboard');
             } else if (res.status === 403) {
                 setErrMsg("Invalid username or password");
             } else {
