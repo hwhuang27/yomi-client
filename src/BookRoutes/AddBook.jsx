@@ -8,7 +8,7 @@ function AddBook() {
     const [status, setStatus] = useState("Finished");
     const [rating, setRating] = useState("-");
     const [notes, setNotes] = useState("");
-    const [errMsg, setErrMsg] = useState("");
+    const [error, setError] = useState("");
 
     let navigate = useNavigate();
 
@@ -17,7 +17,7 @@ function AddBook() {
 
         try {
             if (title === "" || author === "" || status === "" ) {
-                setErrMsg("Fields cannot be empty");
+                setError("Fields cannot be empty");
                 throw new Error("Fields cannot be empty");
             }
 
@@ -37,12 +37,12 @@ function AddBook() {
             });
 
             if (res.status === 200) {
-                setErrMsg("");
+                setError("");
                 navigate("/dashboard");
             } else if (res.status === 400) {
-                setErrMsg("Something went wrong");
+                setError("Something went wrong");
             } else {
-                setErrMsg("Server error occured");
+                setError("Server error occured");
             }
         } catch (err) {
             console.log(err);
@@ -102,8 +102,8 @@ function AddBook() {
                     onChange={(e) => setNotes(e.target.value)}
                 />
 
-                <div className="errMsg">
-                    {errMsg ? <p style={{ color: "#ef4444" }}>{errMsg}</p> : null}
+                <div className="error">
+                    {error ? <p style={{ color: "#ef4444" }}>{error}</p> : null}
                 </div>
 
                 <div className="btn-group">

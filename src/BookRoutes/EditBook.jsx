@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { decodeEntities } from '../helpers/decodeHTML.jsx';
 
 function EditBook() {
     const { id } = useParams();
@@ -8,14 +9,39 @@ function EditBook() {
     const [status, setStatus] = useState("Finished");
     const [rating, setRating] = useState("-");
     const [notes, setNotes] = useState("");
-    const [errMsg, setErrMsg] = useState("");
+    const [error, setError] = useState("");
 
     let navigate = useNavigate();
 
     // fetch book data with params id and populate fields
     useEffect(() => {
-        console.log(id);
-        return;
+        const getBook = async () => {
+            try {
+                const response = await fetch(`https://bookshelf-api-production.up.railway.app/api/books/${id}`,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Authorization": `bearer ${localStorage.getItem("token")}`,
+                        },
+                    }
+                )
+                if (!response.ok) {
+                    // throw new Error(`HTTP Error: Status Code ${response.status}`);
+                    throw new Error(`Error: Token expired, login again.`);
+                }
+                let data = await response.json();
+                
+                setTitle(decodeEntities(data.book.title));
+                setAuthor(decodeEntities(data.book.author));
+                setStatus(data.book.status);
+                setRating(data.book.rating);
+                setNotes(decodeEntities(data.book.notes));
+                setError(null);
+            } catch (err) {
+                setError(err.message);
+            }
+        }
+        getBook();
     }, []);
 
 
@@ -23,11 +49,11 @@ function EditBook() {
         e.preventDefault();
         try {
             if (title === "" || author === "" || status === "") {
-                setErrMsg("Fields cannot be empty");
+                setError("Fields cannot be empty");
                 throw new Error("Fields cannot be empty");
             }
 
-            let res = await fetch("https://bookshelf-api-production.up.railway.app/api/books", {
+            let res = await fetch(`https://bookshelf-api-production.up.railway.app/api/books/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -39,23 +65,22 @@ function EditBook() {
                     status,
                     rating,
                     notes,
-                    // SET OLD ID HERE
+                    _id: id,
                 }),
             });
 
             if (res.status === 200) {
-                setErrMsg("");
+                setError("");
                 navigate("/dashboard");
             } else if (res.status === 400) {
-                setErrMsg("Something went wrong");
+                setError("Something went wrong");
             } else {
-                setErrMsg("Server error occured");
+                setError("Server error occured");
             }
         } catch (err) {
             console.log(err);
         }
     }
-
 
     return (
         <form onSubmit={handleSubmit}>
@@ -66,6 +91,7 @@ function EditBook() {
                 <input
                     type="text"
                     name={title}
+                    value={title}
                     id="title"
                     onChange={(e) => setTitle(e.target.value)}
                 />
@@ -74,22 +100,24 @@ function EditBook() {
                 <input
                     type="text"
                     name={author}
+                    value={author}
                     id="author"
                     onChange={(e) => setAuthor(e.target.value)}
                 />
 
                 <label htmlFor="status">Status</label>
-                <select name={status} id="status" onChange={(e) => setStatus(e.target.value)}>
+                <select name={status} value={status} id="status" onChange={(e) => setStatus(e.target.value)}>
                     <option value="">--Please choose a status--</option>
                     <option value="Finished">Finished</option>
                     <option value="Reading">Reading</option>
                     <option value="Wishlist">Wishlist</option>
                     <option value="Dropped">Dropped</option>
-                </select>
 
+                </select>
+                
                 <label htmlFor="rating">Rating</label>
-                <select name={rating} id="rating" onChange={(e) => setRating(e.target.value)}>
-                    <option value="">--Please choose a rating--</option>
+                <select name={rating} value={rating} id="rating" onChange={(e) => setRating(e.target.value)}>
+                    <option value="-">--Please choose a rating--</option>
                     <option value="10">10</option>
                     <option value="9">9</option>
                     <option value="8">8</option>
@@ -105,18 +133,19 @@ function EditBook() {
                 <label htmlFor="notes">Notes</label>
                 <textarea
                     name={notes}
+                    value={notes}
                     id="notes"
                     rows="5"
                     cols="33"
                     onChange={(e) => setNotes(e.target.value)}
                 />
 
-                <div className="errMsg">
-                    {errMsg ? <p style={{ color: "#ef4444" }}>{errMsg}</p> : null}
+                <div className="error">
+                    {error ? <p style={{ color: "#ef4444" }}>{error}</p> : null}
                 </div>
 
                 <div className="btn-group">
-                    {/* <button>Edit Book</button> */}
+                    <button>Edit Book</button>
                     <Link to='/dashboard' className="button">Go Back</Link>
                 </div>
             </div>

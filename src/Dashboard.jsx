@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom";
+import { decodeEntities } from './helpers/decodeHTML.jsx';
 import Book from './Book.jsx'
-import './App.css'
 
 function Dashboard() {
   const [books, setBooks] = useState([]);
@@ -12,23 +12,6 @@ function Dashboard() {
     localStorage.clear();
     navigate('/login');
   } 
-  
-  const decodeEntities = (function () {
-    // this prevents any overhead from creating the object each time
-    const element = document.createElement('div');
-    function decodeHTMLEntities(str) {
-      if (str && typeof str === 'string') {
-        // strip script/html tags
-        str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
-        str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
-        element.innerHTML = str;
-        str = element.textContent;
-        element.textContent = '';
-      }
-      return str;
-    }
-    return decodeHTMLEntities;
-  })();
 
   // fetch all books from user
   useEffect(() => {
