@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { redirect, Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './App.css'
 
 const Register = () => {
@@ -10,6 +10,8 @@ const Register = () => {
     const [confirmPass, setConfirmPass] = useState("");
     const [regMsg, setRegMsg] = useState("");
     const [errMsg, setErrMsg] = useState("");
+
+    let navigate = useNavigate();
 
     let handleSubmit = async (e) => {
         e.preventDefault();
@@ -40,6 +42,7 @@ const Register = () => {
             if(res.status === 200){
                 setErrMsg("");
                 setRegMsg(`User ${username} registered!`);
+                navigate('/login');
             } else if( res.status === 400) {
                 setRegMsg("");
                 setErrMsg("Username already registered");

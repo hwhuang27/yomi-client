@@ -43,7 +43,8 @@ function Dashboard() {
           }
         )
         if (!response.ok){
-          throw new Error(`HTTP Error: Status Code ${response.status}`);
+          // throw new Error(`HTTP Error: Status Code ${response.status}`);
+          throw new Error(`Error: Token expired, login again.`);
         }
         let data = await response.json();
         
