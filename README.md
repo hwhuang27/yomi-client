@@ -19,3 +19,18 @@ Each book has a:
 - [PassportJS](https://www.passportjs.org/) for local & JWT authentication
 - [Vercel](https://vercel.com/) for frontend deployment
 - [Railway](https://railway.app/) for backend deployment
+
+## Screenshots
+
+#### Dashboard (Light)
+![alt text](https://raw.githubusercontent.com/hwhuang27/bookshelf-client/main/src/assets/screenshots/dashboardLight.png)
+
+#### Dashboard (Dark)
+![alt text](https://raw.githubusercontent.com/hwhuang27/bookshelf-client/main/src/assets/screenshots/dashboardDark.png)
+
+#### Login
+![alt text](https://raw.githubusercontent.com/hwhuang27/bookshelf-client/main/src/assets/screenshots/login.png)
+
+#### Add Book
+![alt text](https://raw.githubusercontent.com/hwhuang27/bookshelf-client/main/src/assets/screenshots/addBook.png)
+
