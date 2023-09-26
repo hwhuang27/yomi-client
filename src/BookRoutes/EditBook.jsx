@@ -135,8 +135,8 @@ function EditBook() {
                     name={notes}
                     value={notes}
                     id="notes"
-                    rows="5"
-                    cols="33"
+                    rows="3"
+                    cols="30"
                     onChange={(e) => setNotes(e.target.value)}
                 />
 

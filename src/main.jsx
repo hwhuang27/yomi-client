@@ -7,7 +7,6 @@ import Dashboard from './Dashboard.jsx'
 import AddBook from './BookRoutes/AddBook.jsx'
 import EditBook from './BookRoutes/EditBook.jsx'
 import DeleteBook from './BookRoutes/DeleteBook.jsx'
-
 import './index.css'
 
 const router = createBrowserRouter([

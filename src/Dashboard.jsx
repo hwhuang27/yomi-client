@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { decodeEntities } from './helpers/decodeHTML.jsx';
 import Book from './Book.jsx'
 
+
 function Dashboard() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -60,9 +61,9 @@ function Dashboard() {
   return (
     <div>
       <h1>📚 Bookshelf 📚</h1>
-      <h2>Welcome back, {localStorage.getItem('name')}</h2>
-      <Link to="/book/new" className="button">Add New Book</Link>
-      <button onClick={logout}>Logout</button>
+      <h2>Welcome back, {localStorage.getItem('name')}.</h2>
+      <Link to="/book/new" className="link-btn">Add Book</Link>
+      <button className="button" onClick={logout}>Logout</button>
 
       {loading && <h2>One moment...</h2>}
       {error && (
