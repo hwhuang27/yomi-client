@@ -45,6 +45,12 @@ h1 {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #bbf7d0;
+  }
+  .link-btn {
+    background-color: #bbf7d0;
+  }
+  .button {
+    background-color: #fecaca;
   }
 }
