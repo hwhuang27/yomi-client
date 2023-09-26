@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Book({id, title, author, status, rating, notes, date_added}) {
     return (
         <tr>
-            <td>{title}</td>
+            <th scope="row">{title}</th>
             <td>{author}</td>
             <td>{status}</td>
             <td>{rating}</td>

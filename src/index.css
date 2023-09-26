@@ -38,7 +38,7 @@ h1 {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    color: rgba(255, 255, 255, 0.87);
+    color: #fafaf9;
     background-color: #242424; 
   }
   a:hover {

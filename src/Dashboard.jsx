@@ -74,14 +74,14 @@ function Dashboard() {
       <table>
           <thead>
             <tr>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Status</th>
-              <th>Rating</th>
-              <th>Notes</th>
-              <th>Date Added</th>
-              <th>&nbsp;</th>
-              <th>&nbsp;</th>
+              <th scope="col">Title</th>
+              <th scope="col">Author</th>
+              <th scope="col">Status</th>
+              <th scope="col">Rating</th>
+              <th scope="col">Notes</th>
+              <th scope="col">Date Added</th>
+              <th scope="col">&nbsp;</th>
+              <th scope="col">&nbsp;</th>
             </tr>
           </thead>
           <tbody>
