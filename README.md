@@ -2,7 +2,7 @@
 
 Website where users can create a personal bookshelf to keep track of their books.
 
-Live site can be found here: [Bookshelf](bookshelf-client-eight.vercel.app)
+Live site can be found here: [Bookshelf](https://bookshelf-client-eight.vercel.app/)
 
 Fullstack practice project. Served with the [bookshelf-api](https://github.com/hwhuang27/bookshelf-api).
 
