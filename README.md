@@ -1,4 +1,4 @@
-# Bookshelf
+# 📚 Bookshelf 📚
 
 Website where users can create a personal bookshelf to keep track of their books.
 
@@ -11,7 +11,7 @@ Each book has a:
 - rating
 - personal note
 
-## Built with...
+## 🛠️ Built with... 🛠️
 
 - [React](https://react.dev/) and [Vite](https://vitejs.dev/) for frontend
 - [NodeJS](https://nodejs.org/en) and [Express](https://expressjs.com/) for backend
@@ -20,7 +20,7 @@ Each book has a:
 - [Vercel](https://vercel.com/) for frontend deployment
 - [Railway](https://railway.app/) for backend deployment
 
-## Screenshots
+## 📷 Screenshots 📷
 
 #### Dashboard (Light)
 ![alt text](https://raw.githubusercontent.com/hwhuang27/bookshelf-client/main/src/assets/screenshots/dashboardLight.png)
