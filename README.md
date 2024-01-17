@@ -24,15 +24,12 @@ Each book has a:
 
 ## 📷 Screenshots 📷
 
-#### Dashboard (Light)
-![alt text](https://raw.githubusercontent.com/hwhuang27/bookshelf-client/main/src/assets/screenshots/dashboardLight.png)
-
-#### Dashboard (Dark)
-![alt text](https://raw.githubusercontent.com/hwhuang27/bookshelf-client/main/src/assets/screenshots/dashboardDark.png)
+#### Dashboard
+![alt text](https://raw.githubusercontent.com/hwhuang27/yomi-client/main/src/assets/screenshots/dashboard.png)
 
 #### Login
-![alt text](https://raw.githubusercontent.com/hwhuang27/bookshelf-client/main/src/assets/screenshots/login.png)
+![alt text](https://raw.githubusercontent.com/hwhuang27/yomi-client/main/src/assets/screenshots/login.png)
 
 #### Add Book
-![alt text](https://raw.githubusercontent.com/hwhuang27/bookshelf-client/main/src/assets/screenshots/addBook.png)
+![alt text](https://raw.githubusercontent.com/hwhuang27/yomi-client/main/src/assets/screenshots/addBook.png)
 
