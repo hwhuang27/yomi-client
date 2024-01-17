@@ -1,10 +1,10 @@
-# 📚 Bookshelf 📚
+# 📚 Yomi 📚
 
-Website where users can create a personal bookshelf to keep track of their books.
+Create a personal bookshelf to track your books.
 
-Live site can be found here: [Bookshelf](https://bookshelf-client-eight.vercel.app/)
+Live site can be found here: [Yomi](https://bookshelf-client-eight.vercel.app/)
 
-Fullstack practice project. Served with the [bookshelf-api](https://github.com/hwhuang27/bookshelf-api).
+Fullstack practice project. Served with the [yomi-api](https://github.com/hwhuang27/yomi-api).
 
 Each book has a:
 - title

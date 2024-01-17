@@ -60,7 +60,7 @@ function Dashboard() {
 
   return (
     <div>
-      <h1>📚 Bookshelf 📚</h1>
+      <h1>📚 Yomi 📚</h1>
       <h2>Welcome back, {localStorage.getItem('name')}.</h2>
       <Link to="/book/new" className="link-btn">Add Book</Link>
       <button className="button" onClick={logout}>Logout</button>
